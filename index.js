@@ -38,17 +38,11 @@ class App {
             });
 
             this.tg.BackButton.onClick(function() {
-                // if (app.menuActive) {
-                //     app.menuClicked();
-                // } else if (app.screens.length > 1) {
-                //     app.screens.pop();
-                //     app.openScreen(app.screens.slice(-1));
-                // }
-                if (app.screens.length > 1) {
+                if (app.menuActive) {
+                    app.menuClicked();
+                } else if (app.screens.length > 1) {
                     app.screens.pop();
                     var screen = app.screens.slice(-1);
-                    // app.openScreen();
-                    // this.screens.push(screen);
                     var current = this.activeScreen;
                     this.activeScreen = screen;
             
