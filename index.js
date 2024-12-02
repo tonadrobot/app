@@ -46,7 +46,26 @@ class App {
                 // }
                 if (app.screens.length > 1) {
                     app.screens.pop();
-                    app.openScreen(app.screens.slice(-1));
+                    var screen = app.screens.slice(-1);
+                    // app.openScreen();
+                    // this.screens.push(screen);
+                    var current = this.activeScreen;
+                    this.activeScreen = screen;
+            
+                    $("#screen_" + current).fadeOut(function() {
+                        $("#screen_" + screen).fadeIn();
+                    });
+            
+                    if (screen == "home") {
+                        this.tg.SecondaryButton.show();
+                        this.tg.MainButton.show();
+                        this.tg.BackButton.hide();
+                        this.screens = ["home"]
+                    } else {
+                        this.tg.SecondaryButton.hide();
+                        this.tg.MainButton.hide();
+                        this.tg.BackButton.show();
+                    }
                 }
             });
     
