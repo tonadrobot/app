@@ -45,6 +45,8 @@ class App {
                     var screen = app.screens.slice(-1);
                     var current = this.activeScreen;
                     this.activeScreen = screen;
+
+                    alert(screen + " " + current);
             
                     $("#screen_" + current).fadeOut(function() {
                         $("#screen_" + screen).fadeIn();
@@ -60,8 +62,6 @@ class App {
                         this.tg.MainButton.hide();
                         this.tg.BackButton.show();
                     }
-                } else {
-                    alert("dfdas");
                 }
             });
     
