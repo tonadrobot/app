@@ -43,8 +43,8 @@ class App {
                 } else if (app.screens.length > 1) {
                     app.screens.pop();
                     var screen = app.screens.slice(-1);
-                    var current = this.activeScreen;
-                    this.activeScreen = screen;
+                    var current = app.activeScreen;
+                    app.activeScreen = screen;
 
                     alert(screen + " " + current);
             
@@ -53,14 +53,14 @@ class App {
                     });
             
                     if (screen == "home") {
-                        this.tg.SecondaryButton.show();
-                        this.tg.MainButton.show();
-                        this.tg.BackButton.hide();
-                        this.screens = ["home"]
+                        app.tg.SecondaryButton.show();
+                        app.tg.MainButton.show();
+                        app.tg.BackButton.hide();
+                        app.screens = ["home"]
                     } else {
-                        this.tg.SecondaryButton.hide();
-                        this.tg.MainButton.hide();
-                        this.tg.BackButton.show();
+                        app.tg.SecondaryButton.hide();
+                        app.tg.MainButton.hide();
+                        app.tg.BackButton.show();
                     }
                 }
             });
