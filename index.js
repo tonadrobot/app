@@ -45,8 +45,6 @@ class App {
                     var screen = app.screens.slice(-1);
                     var current = app.activeScreen;
                     app.activeScreen = screen;
-
-                    alert(screen + " " + current);
             
                     $("#screen_" + current).fadeOut(function() {
                         $("#screen_" + screen).fadeIn();
