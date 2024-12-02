@@ -38,9 +38,13 @@ class App {
             });
 
             this.tg.BackButton.onClick(function() {
-                if (app.menuActive) {
-                    app.menuClicked();
-                } else if (app.screens.length > 1) {
+                // if (app.menuActive) {
+                //     app.menuClicked();
+                // } else if (app.screens.length > 1) {
+                //     app.screens.pop();
+                //     app.openScreen(app.screens.slice(-1));
+                // }
+                if (app.screens.length > 1) {
                     app.screens.pop();
                     app.openScreen(app.screens.slice(-1));
                 }
@@ -88,6 +92,7 @@ class App {
             this.tg.SecondaryButton.show();
             this.tg.MainButton.show();
             this.tg.BackButton.hide();
+            this.screens = ["home"]
         } else {
             this.tg.SecondaryButton.hide();
             this.tg.MainButton.hide();
