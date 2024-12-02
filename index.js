@@ -60,6 +60,8 @@ class App {
                         this.tg.MainButton.hide();
                         this.tg.BackButton.show();
                     }
+                } else {
+                    alert("dfdas");
                 }
             });
     
