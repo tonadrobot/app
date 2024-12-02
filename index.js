@@ -97,23 +97,13 @@ class App {
 
     menuClicked() {
         if (!app.menuActive) {
-            app.tg.BackButton.show();
-            app.tg.SecondaryButton.hide();
-            app.tg.MainButton.hide();
             app.menuActive = true;
-            $("#screen_" + app.activeScreen).fadeOut(function() {
-                $("#screen_menu").fadeIn();
-            });
+            this.openScreen("menu");
         } else {
-            if (app.activeScreen == "home") {
-                app.tg.BackButton.hide();
-                app.tg.SecondaryButton.show();
-                app.tg.MainButton.show();
+            if (app.screens.length > 1) {
+                app.screens.pop();
+                app.openScreen(app.screens.slice(-1));
             }
-            window.history.go(-1);
-            $("#screen_menu").fadeOut(function() {
-                $("#screen_" + app.activeScreen).fadeIn();
-            });
             app.menuActive = false;
         }
     }
