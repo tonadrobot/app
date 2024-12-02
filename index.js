@@ -126,7 +126,23 @@ class App {
         } else {
             if (app.screens.length > 1) {
                 app.screens.pop();
-                app.openScreen(app.screens.slice(-1));
+                var screen = app.screens.slice(-1);
+                this.activeScreen = screen;
+
+                $("#screen_menu").fadeOut(function() {
+                    $("#screen_" + screen).fadeIn();
+                });
+
+                if (screen == "home") {
+                    this.tg.SecondaryButton.show();
+                    this.tg.MainButton.show();
+                    this.tg.BackButton.hide();
+                    this.screens = ["home"]
+                } else {
+                    this.tg.SecondaryButton.hide();
+                    this.tg.MainButton.hide();
+                    this.tg.BackButton.show();
+                }
             }
             app.menuActive = false;
         }
