@@ -24,6 +24,7 @@ class App {
     userData;
     miningActive;
     miningAlreadyActive;
+    cycleActive;
 
     constructor() {
         this.simulationRunning = false;
@@ -33,6 +34,7 @@ class App {
         this.activeScreen = "home";
         this.screens = ["home"];
         this.miningActive = true;
+        this.cycleActive = false;
         this.miningAlreadyActive = false;
         try {
             this.tg = Telegram.WebApp;
@@ -163,11 +165,13 @@ class App {
             method: "GET",
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name,
             success: function(data) {
-                if (data.is_follower) {
+                if (data.is_follower && data.cycle_active) {
                     tl.play();
                     $("#miningyes").show();
-                } else {
+                } else if (!data.is_follower) {
                     $("#miningno").show();
+                } else if (!data.cycle_active) {
+                    $("#miningnocycle").show();
                 }
 
                 if (!data.is_member) {
@@ -186,6 +190,7 @@ class App {
                     app.miningAlreadyActive = false;
                 }
 
+                app.cycleActive = data.cycle_active;
                 app.data = data;
                 $("#refLink").html("t.me/TonCityRobot/miner?startapp=" + data.code);
                 $("#earnings").html(data.earnings);
