@@ -22,6 +22,7 @@ class App {
     menuActive;
     theme;
     userData;
+    miningActive;
 
     constructor() {
         this.simulationRunning = false;
@@ -30,6 +31,7 @@ class App {
         this.menuActive = false;
         this.activeScreen = "home";
         this.screens = ["home"];
+        this.miningActive = true;
         try {
             this.tg = Telegram.WebApp;
             this.tg.SettingsButton.show();
@@ -70,7 +72,19 @@ class App {
             this.userData = userData;
 
             this.tgid = userData.user.id;
-            this.ref = userData.start_param;
+            if (userData.start_param != "restart") {
+                this.ref = userData.start_param;
+            } else {
+                if (this.miningActive) {
+                    $("#successMessage").html("<small><strong>Mining is already active.</strong></small>");
+
+                    $("#successMessage").fadeIn(function() {
+                        setTimeout(function() {
+                            $("#successMessage").fadeOut();
+                        }, 5000);
+                    });
+                }
+            }
 
             this.tg.SecondaryButton.setText("Compound")
             this.tg.SecondaryButton.show();
