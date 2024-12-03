@@ -163,13 +163,15 @@ class App {
             success: function(data) {
                 app.miningActive = data.cycle_active;
 
-                if (data.is_follower && data.cycle_active) {
-                    tl.play();
-                    $("#miningyes").show();
-                } else if (!data.is_follower) {
-                    $("#miningno").show();
-                } else if (!data.cycle_active) {
-                    $("#miningnocycle").show();
+                if (!app.miningRestart) {
+                    if (data.is_follower && data.cycle_active) {
+                        tl.play();
+                        $("#miningyes").show();
+                    } else if (!data.is_follower) {
+                        $("#miningno").show();
+                    } else if (!data.cycle_active) {
+                        $("#miningnocycle").show();
+                    }
                 }
 
                 if (!data.is_member) {
@@ -187,6 +189,8 @@ class App {
                     });
                     app.miningAlreadyActive = false;
                 } else if (!app.miningActive && app.miningRestart) {
+                    tl.play();
+                    $("#miningyes").show();
                     app.callRestartMining();
                 }
 
