@@ -183,6 +183,7 @@ class App {
                             $("#successMessage").fadeOut();
                         }, 5000);
                     });
+                    app.miningAlreadyActive = false;
                 }
 
                 app.data = data;
