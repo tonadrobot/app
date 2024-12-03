@@ -23,6 +23,7 @@ class App {
     theme;
     userData;
     miningActive;
+    miningAlreadyActive;
 
     constructor() {
         this.simulationRunning = false;
@@ -32,6 +33,7 @@ class App {
         this.activeScreen = "home";
         this.screens = ["home"];
         this.miningActive = true;
+        this.miningAlreadyActive = false;
         try {
             this.tg = Telegram.WebApp;
             this.tg.SettingsButton.show();
@@ -76,13 +78,7 @@ class App {
                 this.ref = userData.start_param;
             } else {
                 if (this.miningActive) {
-                    $("#successMessage").html("<small><strong>Mining is already active.</strong></small>");
-
-                    $("#successMessage").fadeIn(function() {
-                        setTimeout(function() {
-                            $("#successMessage").fadeOut();
-                        }, 5000);
-                    });
+                    this.miningAlreadyActive = true;
                 }
             }
 
@@ -177,6 +173,16 @@ class App {
                 if (!data.is_member) {
                     $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/TonCitySquare\" target=\"_blank\" class=\"text-danger\">@TonCitySquare</a> group for help and support!</strong></small>")
                     $("#infoMessage").show();
+                }
+
+                if (app.miningActive && app.miningAlreadyActive) {
+                    $("#successMessage").html("<small><strong>Mining is already active.</strong></small>");
+
+                    $("#successMessage").fadeIn(function() {
+                        setTimeout(function() {
+                            $("#successMessage").fadeOut();
+                        }, 5000);
+                    });
                 }
 
                 app.data = data;
