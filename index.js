@@ -202,7 +202,10 @@ class App {
                 if (data.addr_withdraw != data.code) {
                     $("#addressWithdraw").val(data.addr_withdraw);
                 }
-                app.countEarnings();
+                
+                if (data.is_follower && data.cycle_active) {
+                    app.countEarnings();
+                }
             }
         });
     }
