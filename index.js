@@ -23,8 +23,7 @@ class App {
     theme;
     userData;
     miningActive;
-    miningAlreadyActive;
-    cycleActive;
+    miningRestart;
 
     constructor() {
         this.simulationRunning = false;
@@ -34,8 +33,7 @@ class App {
         this.activeScreen = "home";
         this.screens = ["home"];
         this.miningActive = true;
-        this.cycleActive = false;
-        this.miningAlreadyActive = false;
+        this.miningRestart = false;
         try {
             this.tg = Telegram.WebApp;
             this.tg.SettingsButton.show();
@@ -79,9 +77,7 @@ class App {
             if (userData.start_param != "restart") {
                 this.ref = userData.start_param;
             } else {
-                if (this.miningActive) {
-                    this.miningAlreadyActive = true;
-                }
+                this.miningRestart = true;
             }
 
             this.tg.SecondaryButton.setText("Compound")
@@ -165,6 +161,8 @@ class App {
             method: "GET",
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name,
             success: function(data) {
+                app.miningActive = data.cycle_active;
+
                 if (data.is_follower && data.cycle_active) {
                     tl.play();
                     $("#miningyes").show();
@@ -179,7 +177,7 @@ class App {
                     $("#infoMessage").show();
                 }
 
-                if (app.miningActive && app.miningAlreadyActive) {
+                if (app.miningActive && app.miningRestart) {
                     $("#successMessage").html("<small><strong>Mining is already active, wait for the notification to restart.</strong></small>");
 
                     $("#successMessage").fadeIn(function() {
@@ -188,9 +186,10 @@ class App {
                         }, 5000);
                     });
                     app.miningAlreadyActive = false;
+                } else if (!app.miningActive && app.miningRestart) {
+                    app.callRestartMining();
                 }
 
-                app.cycleActive = data.cycle_active;
                 app.data = data;
                 $("#refLink").html("t.me/TonCityRobot/miner?startapp=" + data.code);
                 $("#earnings").html(data.earnings);
@@ -202,7 +201,7 @@ class App {
                 if (data.addr_withdraw != data.code) {
                     $("#addressWithdraw").val(data.addr_withdraw);
                 }
-                
+
                 if (data.is_follower && data.cycle_active) {
                     app.countEarnings();
                 }
@@ -457,6 +456,27 @@ class App {
             });
         }
         this.openScreen("home");
+    }
+
+    callRestartMining() {
+        $.ajax({
+            method: "POST",
+            url: BACKEND + "/restart/" + app.tgid,
+            success: function(data) {
+                // clearTimeout(app.tmout);
+                // app.loadData();
+
+                // app.tg.SecondaryButton.hideProgress();
+
+                $("#successMessage").html("<small><strong>Daily mining cycle restarted successfully.</strong></small>");
+
+                $("#successMessage").fadeIn(function() {
+                    setTimeout(function() {
+                        $("#successMessage").fadeOut();
+                    }, 5000);
+                });
+            }
+        });
     }
 
 }
