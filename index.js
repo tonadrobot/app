@@ -176,7 +176,7 @@ class App {
                 }
 
                 if (app.miningActive && app.miningAlreadyActive) {
-                    $("#successMessage").html("<small><strong>Mining is already active.</strong></small>");
+                    $("#successMessage").html("<small><strong>Mining is already active, wait for the notification to restart.</strong></small>");
 
                     $("#successMessage").fadeIn(function() {
                         setTimeout(function() {
