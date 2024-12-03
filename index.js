@@ -180,6 +180,9 @@ class App {
                 }
 
                 if (app.miningActive && app.miningRestart) {
+                    tl.play();
+                    $("#miningyes").show();
+                    
                     $("#successMessage").html("<small><strong>Mining is already active, wait for the notification to restart.</strong></small>");
 
                     $("#successMessage").fadeIn(function() {
