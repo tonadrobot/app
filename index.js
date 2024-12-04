@@ -38,6 +38,7 @@ class App {
             this.tg = Telegram.WebApp;
             this.tg.SettingsButton.show();
             this.tg.SettingsButton.onClick(function() {
+                app.menuActive = false;
                 app.openScreen("settings");
             });
 
@@ -101,23 +102,23 @@ class App {
     }
 
     openScreen(screen) {
-        app.screens.push(screen);
-        var current = app.activeScreen;
-        app.activeScreen = screen;
+        this.screens.push(screen);
+        var current = this.activeScreen;
+        this.activeScreen = screen;
 
         $("#screen_" + current).fadeOut(function() {
             $("#screen_" + screen).fadeIn();
         });
 
         if (screen == "home") {
-            app.tg.SecondaryButton.show();
-            app.tg.MainButton.show();
-            app.tg.BackButton.hide();
-            app.screens = ["home"]
+            this.tg.SecondaryButton.show();
+            this.tg.MainButton.show();
+            this.tg.BackButton.hide();
+            this.screens = ["home"]
         } else {
-            app.tg.SecondaryButton.hide();
-            app.tg.MainButton.hide();
-            app.tg.BackButton.show();
+            this.tg.SecondaryButton.hide();
+            this.tg.MainButton.hide();
+            this.tg.BackButton.show();
         }
     }
 
