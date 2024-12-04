@@ -82,13 +82,13 @@ class App {
             }
 
             this.tg.SecondaryButton.setText("Compound")
-            this.tg.SecondaryButton.show();
+            // this.tg.SecondaryButton.show();
             this.tg.SecondaryButton.color = this.tg.themeParams.button_color;
             this.tg.SecondaryButton.textColor = "#FFFFFF";
             this.tg.SecondaryButton.onClick(this.compound);
     
             this.tg.MainButton.setText("Add TMU")
-            this.tg.MainButton.show();
+            // this.tg.MainButton.show();
             this.tg.MainButton.onClick(this.openNew);
     
             $("#first_name").html(userData.user.first_name);
@@ -163,6 +163,8 @@ class App {
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name,
             success: function(data) {
                 app.miningActive = data.cycle_active;
+                app.tg.SecondaryButton.show();
+                app.tg.MainButton.show();
 
                 if (!app.miningRestart) {
                     if (data.is_follower && data.cycle_active) {
