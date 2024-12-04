@@ -101,23 +101,23 @@ class App {
     }
 
     openScreen(screen) {
-        this.screens.push(screen);
-        var current = this.activeScreen;
-        this.activeScreen = screen;
+        app.screens.push(screen);
+        var current = app.activeScreen;
+        app.activeScreen = screen;
 
         $("#screen_" + current).fadeOut(function() {
             $("#screen_" + screen).fadeIn();
         });
 
         if (screen == "home") {
-            this.tg.SecondaryButton.show();
-            this.tg.MainButton.show();
-            this.tg.BackButton.hide();
-            this.screens = ["home"]
+            app.tg.SecondaryButton.show();
+            app.tg.MainButton.show();
+            app.tg.BackButton.hide();
+            app.screens = ["home"]
         } else {
-            this.tg.SecondaryButton.hide();
-            this.tg.MainButton.hide();
-            this.tg.BackButton.show();
+            app.tg.SecondaryButton.hide();
+            app.tg.MainButton.hide();
+            app.tg.BackButton.show();
         }
     }
 
