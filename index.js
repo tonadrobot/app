@@ -272,6 +272,7 @@ class App {
 
     compound() {
         app.tg.SecondaryButton.showProgress(true);
+        app.miningRestart = false;
 
         $.ajax({
             method: "POST",
