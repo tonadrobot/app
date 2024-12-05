@@ -474,10 +474,7 @@ class App {
             method: "POST",
             url: BACKEND + "/restart/" + app.tgid,
             success: function(data) {
-                // clearTimeout(app.tmout);
-                // app.loadData();
-
-                // app.tg.SecondaryButton.hideProgress();
+                app.countEarnings();
 
                 $("#successMessage").html("<small><strong>Daily mining cycle restarted successfully.</strong></small>");
 
