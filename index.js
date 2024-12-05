@@ -264,6 +264,11 @@ class App {
         var diff = now - this.lastUpdated;
         diff /= 1000;
         var r = diff * this.tmu / (2400 * 3600);
+        var cycle_index = this.data.cycle_count / ((diff / 3600) / 24);
+        if (cycle_index > 1) {
+            cycle_index = 1;
+        }
+        r = r * cycle_index;
         if (this.data.is_follower) {
             return r.toFixed(9);
         } else {
