@@ -262,9 +262,12 @@ class App {
     getRewards() {
         var now = new Date();
         var diff = now - this.lastUpdated;
+        var mt = new Date(this.data.mining_time);
+        var diffCycle = now - mt;
         diff /= 1000;
+        diffCycle /= 1000;
         var r = diff * this.tmu / (2400 * 3600);
-        var cycle_index = this.data.cycle_count / ((diff / 3600) / 24);
+        var cycle_index = this.data.cycle_count / ((diffCycle / 3600) / 24);
         if (cycle_index > 1) {
             cycle_index = 1;
         }
