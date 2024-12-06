@@ -158,9 +158,10 @@ class App {
             username = this.userData.user.username;
             first_name = this.userData.user.first_name;
         }
+        var ts = new Date().getTime();
         $.ajax({
             method: "GET",
-            url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name,
+            url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
             success: function(data) {
                 app.miningActive = data.cycle_active;
                 app.tg.SecondaryButton.show();
@@ -348,9 +349,10 @@ class App {
     }
 
     startMining() {
+        var ts = new Date().getTime();
         $.ajax({
             method: "GET",
-            url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + this.userData.user.username + "/" + this.userData.user.first_name,
+            url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + this.userData.user.username + "/" + this.userData.user.first_name + "?ts=" + ts,
             success: function(data) {
                 if (data.is_follower) {
                     app.loadData()
