@@ -179,7 +179,7 @@ class App {
                 }
 
                 if (!data.is_member) {
-                    $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/TonCitySquare\" target=\"_blank\" class=\"text-danger\">@TonCitySquare</a> group for help and support!</strong></small>")
+                    $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/FrenlyCoin\" target=\"_blank\" class=\"text-danger\">@FrenlyCoin</a> group for help and support!</strong></small>")
                     $("#infoMessage").show();
                 }
 
@@ -202,7 +202,7 @@ class App {
                 }
 
                 app.data = data;
-                $("#refLink").html("t.me/TonCityRobot/miner?startapp=" + data.code);
+                $("#refLink").html("t.me/FrenlyRobot/miner?startapp=" + data.code);
                 $("#earnings").html(data.earnings);
                 $("#tmu").html(data.tmu.toFixed(9));
                 app.tmu = data.tmu;
