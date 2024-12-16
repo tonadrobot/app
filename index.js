@@ -36,37 +36,37 @@ class App {
         this.miningRestart = false;
         try {
             this.tg = Telegram.WebApp;
-            this.tg.SettingsButton.show();
-            this.tg.SettingsButton.onClick(function() {
-                app.menuActive = false;
-                app.openScreen("settings");
-            });
+            // this.tg.SettingsButton.show();
+            // this.tg.SettingsButton.onClick(function() {
+            //     app.menuActive = false;
+            //     app.openScreen("settings");
+            // });
 
-            this.tg.BackButton.onClick(function() {
-                if (app.menuActive) {
-                    app.menuClicked();
-                } else if (app.screens.length > 1) {
-                    app.screens.pop();
-                    var screen = app.screens.slice(-1);
-                    var current = app.activeScreen;
-                    app.activeScreen = screen;
+            // this.tg.BackButton.onClick(function() {
+            //     if (app.menuActive) {
+            //         app.menuClicked();
+            //     } else if (app.screens.length > 1) {
+            //         app.screens.pop();
+            //         var screen = app.screens.slice(-1);
+            //         var current = app.activeScreen;
+            //         app.activeScreen = screen;
             
-                    $("#screen_" + current).fadeOut(function() {
-                        $("#screen_" + screen).fadeIn();
-                    });
+            //         $("#screen_" + current).fadeOut(function() {
+            //             $("#screen_" + screen).fadeIn();
+            //         });
             
-                    if (screen == "home") {
-                        app.tg.SecondaryButton.show();
-                        app.tg.MainButton.show();
-                        app.tg.BackButton.hide();
-                        app.screens = ["home"]
-                    } else {
-                        app.tg.SecondaryButton.hide();
-                        app.tg.MainButton.hide();
-                        app.tg.BackButton.show();
-                    }
-                }
-            });
+            //         if (screen == "home") {
+            //             app.tg.SecondaryButton.show();
+            //             app.tg.MainButton.show();
+            //             app.tg.BackButton.hide();
+            //             app.screens = ["home"]
+            //         } else {
+            //             app.tg.SecondaryButton.hide();
+            //             app.tg.MainButton.hide();
+            //             app.tg.BackButton.show();
+            //         }
+            //     }
+            // });
     
             const params = new URLSearchParams(Telegram.WebApp.initData);
             const userData = Object.fromEntries(params);
@@ -81,23 +81,23 @@ class App {
                 this.miningRestart = true;
             }
 
-            this.tg.SecondaryButton.setText("Compound")
-            // this.tg.SecondaryButton.show();
-            this.tg.SecondaryButton.color = this.tg.themeParams.button_color;
-            this.tg.SecondaryButton.textColor = "#FFFFFF";
-            this.tg.SecondaryButton.onClick(this.compound);
+            // this.tg.SecondaryButton.setText("Compound")
+            // // this.tg.SecondaryButton.show();
+            // this.tg.SecondaryButton.color = this.tg.themeParams.button_color;
+            // this.tg.SecondaryButton.textColor = "#FFFFFF";
+            // this.tg.SecondaryButton.onClick(this.compound);
     
-            this.tg.MainButton.setText("Add TMU")
-            // this.tg.MainButton.show();
-            this.tg.MainButton.onClick(this.openNew);
+            // this.tg.MainButton.setText("Add TMU")
+            // // this.tg.MainButton.show();
+            // this.tg.MainButton.onClick(this.openNew);
     
-            $("#first_name").html(userData.user.first_name);
+            // $("#first_name").html(userData.user.first_name);
 
             this.loadData();
         } catch (e) {
-            this.tgid = 7422140567;
+            // this.tgid = 7422140567;
             this.loadData();
-            $("#first_name").html("Dev");
+            // $("#first_name").html("Dev");
         }
     }
 
