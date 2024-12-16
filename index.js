@@ -102,53 +102,53 @@ class App {
     }
 
     openScreen(screen) {
-        this.screens.push(screen);
-        var current = this.activeScreen;
-        this.activeScreen = screen;
+        // this.screens.push(screen);
+        // var current = this.activeScreen;
+        // this.activeScreen = screen;
 
-        $("#screen_" + current).fadeOut(function() {
-            $("#screen_" + screen).fadeIn();
-        });
+        // $("#screen_" + current).fadeOut(function() {
+        //     $("#screen_" + screen).fadeIn();
+        // });
 
-        if (screen == "home") {
-            this.tg.SecondaryButton.show();
-            this.tg.MainButton.show();
-            this.tg.BackButton.hide();
-            this.screens = ["home"]
-        } else {
-            this.tg.SecondaryButton.hide();
-            this.tg.MainButton.hide();
-            this.tg.BackButton.show();
-        }
+        // if (screen == "home") {
+        //     this.tg.SecondaryButton.show();
+        //     this.tg.MainButton.show();
+        //     this.tg.BackButton.hide();
+        //     this.screens = ["home"]
+        // } else {
+        //     this.tg.SecondaryButton.hide();
+        //     this.tg.MainButton.hide();
+        //     this.tg.BackButton.show();
+        // }
     }
 
     menuClicked() {
-        if (!app.menuActive) {
-            app.menuActive = true;
-            this.openScreen("menu");
-        } else {
-            if (app.screens.length > 1) {
-                app.screens.pop();
-                var screen = app.screens.slice(-1);
-                this.activeScreen = screen;
+        // if (!app.menuActive) {
+        //     app.menuActive = true;
+        //     this.openScreen("menu");
+        // } else {
+        //     if (app.screens.length > 1) {
+        //         app.screens.pop();
+        //         var screen = app.screens.slice(-1);
+        //         this.activeScreen = screen;
 
-                $("#screen_menu").fadeOut(function() {
-                    $("#screen_" + screen).fadeIn();
-                });
+        //         $("#screen_menu").fadeOut(function() {
+        //             $("#screen_" + screen).fadeIn();
+        //         });
 
-                if (screen == "home") {
-                    this.tg.SecondaryButton.show();
-                    this.tg.MainButton.show();
-                    this.tg.BackButton.hide();
-                    this.screens = ["home"]
-                } else {
-                    this.tg.SecondaryButton.hide();
-                    this.tg.MainButton.hide();
-                    this.tg.BackButton.show();
-                }
-            }
-            app.menuActive = false;
-        }
+        //         if (screen == "home") {
+        //             this.tg.SecondaryButton.show();
+        //             this.tg.MainButton.show();
+        //             this.tg.BackButton.hide();
+        //             this.screens = ["home"]
+        //         } else {
+        //             this.tg.SecondaryButton.hide();
+        //             this.tg.MainButton.hide();
+        //             this.tg.BackButton.show();
+        //         }
+        //     }
+        //     app.menuActive = false;
+        // }
     }
 
     loadData() {
@@ -163,59 +163,59 @@ class App {
             method: "GET",
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
             success: function(data) {
-                app.miningActive = data.cycle_active;
-                app.tg.SecondaryButton.show();
-                app.tg.MainButton.show();
+                // app.miningActive = data.cycle_active;
+                // app.tg.SecondaryButton.show();
+                // app.tg.MainButton.show();
 
-                if (!app.miningRestart) {
-                    if (data.is_follower && data.cycle_active) {
-                        tl.play();
-                        $("#miningyes").show();
-                    } else if (!data.is_follower) {
-                        $("#miningno").show();
-                    } else if (!data.cycle_active) {
-                        $("#miningnocycle").show();
-                    }
-                }
+                // if (!app.miningRestart) {
+                //     if (data.is_follower && data.cycle_active) {
+                //         tl.play();
+                //         $("#miningyes").show();
+                //     } else if (!data.is_follower) {
+                //         $("#miningno").show();
+                //     } else if (!data.cycle_active) {
+                //         $("#miningnocycle").show();
+                //     }
+                // }
 
-                if (!data.is_member) {
-                    $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/FrenlyCoin\" target=\"_blank\" class=\"text-danger\">@FrenlyCoin</a> group for help and support!</strong></small>")
-                    $("#infoMessage").show();
-                }
+                // if (!data.is_member) {
+                //     $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/FrenlyCoin\" target=\"_blank\" class=\"text-danger\">@FrenlyCoin</a> group for help and support!</strong></small>")
+                //     $("#infoMessage").show();
+                // }
 
-                if (app.miningActive && app.miningRestart) {
-                    tl.play();
-                    $("#miningyes").show();
+                // if (app.miningActive && app.miningRestart) {
+                //     tl.play();
+                //     $("#miningyes").show();
                     
-                    $("#successMessage").html("<small><strong>Mining is already active, wait for the notification to restart.</strong></small>");
+                //     $("#successMessage").html("<small><strong>Mining is already active, wait for the notification to restart.</strong></small>");
 
-                    $("#successMessage").fadeIn(function() {
-                        setTimeout(function() {
-                            $("#successMessage").fadeOut();
-                        }, 5000);
-                    });
-                    app.miningAlreadyActive = false;
-                } else if (!app.miningActive && app.miningRestart) {
-                    tl.play();
-                    $("#miningyes").show();
-                    app.callRestartMining();
-                }
+                //     $("#successMessage").fadeIn(function() {
+                //         setTimeout(function() {
+                //             $("#successMessage").fadeOut();
+                //         }, 5000);
+                //     });
+                //     app.miningAlreadyActive = false;
+                // } else if (!app.miningActive && app.miningRestart) {
+                //     tl.play();
+                //     $("#miningyes").show();
+                //     app.callRestartMining();
+                // }
 
-                app.data = data;
-                $("#refLink").html("t.me/FrenlyRobot/miner?startapp=" + data.code);
-                $("#earnings").html(data.earnings);
-                $("#tmu").html(data.tmu.toFixed(9));
-                app.tmu = data.tmu;
-                app.lastUpdated = new Date(data.last_updated);
-                app.timeLock = new Date(data.time_lock);
-                $("#addressDeposit").val(data.addr_deposit);
-                if (data.addr_withdraw != data.code) {
-                    $("#addressWithdraw").val(data.addr_withdraw);
-                }
+                // app.data = data;
+                // $("#refLink").html("t.me/FrenlyRobot/miner?startapp=" + data.code);
+                // $("#earnings").html(data.earnings);
+                // $("#tmu").html(data.tmu.toFixed(9));
+                // app.tmu = data.tmu;
+                // app.lastUpdated = new Date(data.last_updated);
+                // app.timeLock = new Date(data.time_lock);
+                // $("#addressDeposit").val(data.addr_deposit);
+                // if (data.addr_withdraw != data.code) {
+                //     $("#addressWithdraw").val(data.addr_withdraw);
+                // }
 
-                if (data.is_follower && data.cycle_active) {
-                    app.countEarnings();
-                }
+                // if (data.is_follower && data.cycle_active) {
+                //     app.countEarnings();
+                // }
             }
         });
     }
